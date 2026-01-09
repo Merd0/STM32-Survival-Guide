@@ -5,7 +5,7 @@
 ![Topic](https://img.shields.io/badge/Domain-Embedded_Systems-green?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active-blueviolet?style=flat-square)
 
-## 📖 Proje Özeti
+## 📖 Repo Özeti
 Bu depo, **Fırat Üniversitesi Bilgisayar Mühendisliği** Mikroişlemciler müfredatını desteklemek amacıyla oluşturulmuş kapsamlı bir gömülü sistemler kütüphanesidir. 
 
 Proje, STM32 mimarisi üzerinde **GPIO Yönetimi**, **Bitwise Manipülasyon**, **Multiplexing (Zaman Paylaşımlı Tarama)** ve **Input De-bouncing** tekniklerini içeren optimize edilmiş C algoritmalarını barındırır. Amaç, teorik bilgiyi endüstriyel kodlama pratiklerine dönüştürmektir.
