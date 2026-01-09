@@ -1,73 +1,71 @@
-# ⚡ STM32 GPIO & Algorithm Survival Guide
+# STM32 GPIO & Algorithm Survival Guide
 
-![Language](https://img.shields.io/badge/language-C-00599C)
-![Platform](https://img.shields.io/badge/platform-STM32F4-orange)
-![Topic](https://img.shields.io/badge/topic-Embedded_Systems-green)
-![Status](https://img.shields.io/badge/Status-Educational-blueviolet)
+![Language](https://img.shields.io/badge/Language-C-00599C?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-STM32F4-orange?style=flat-square)
+![Topic](https://img.shields.io/badge/Domain-Embedded_Systems-green?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-blueviolet?style=flat-square)
 
-## 📖 Hakkında
-Bu depo (repository), **Fırat Üniversitesi Bilgisayar Mühendisliği** Mikroişlemciler dersi müfredatına uygun olarak geliştirilmiş, STM32 mikrodenetleyicileri için **Gelişmiş GPIO Algoritmaları** kütüphanesidir.
+## 📖 Proje Özeti
+Bu depo, **Fırat Üniversitesi Bilgisayar Mühendisliği** Mikroişlemciler müfredatını desteklemek amacıyla oluşturulmuş kapsamlı bir gömülü sistemler kütüphanesidir. 
 
-Sadece LED yakıp söndürmeyi değil; **Bitwise Operasyonlar**, **Multiplexing (Tarama)**, **Look-Up Table (Matris)** ve **Input De-bouncing** gibi gömülü yazılımın temel taşlarını içeren pratik senaryolar sunar.
+Proje, STM32 mimarisi üzerinde **GPIO Yönetimi**, **Bitwise Manipülasyon**, **Multiplexing (Zaman Paylaşımlı Tarama)** ve **Input De-bouncing** tekniklerini içeren optimize edilmiş C algoritmalarını barındırır. Amaç, teorik bilgiyi endüstriyel kodlama pratiklerine dönüştürmektir.
 
 ---
 
-## 🛠️ Donanım Yapılandırması (Pinout)
-Kodların doğru çalışması için geliştirme kartınızda aşağıdaki pinlerin kullanıldığı varsayılmıştır:
+## 🛠️ Donanım Konfigürasyonu
+Kodların hedeflenen donanım üzerindeki pin haritalaması aşağıdaki gibidir:
 
-| Bileşen | Port & Pinler | Açıklama |
+| Bileşen | Port & Pinler | Fonksiyon |
 | :--- | :--- | :--- |
-| **Dahili LED'ler** | `GPIOD` (12, 13, 14, 15) | Yeşil, Turuncu, Kırmızı, Mavi |
-| **Butonlar** | `GPIOA` (0, 13, 14) | User Button ve Harici Butonlar |
-| **7-Segment (Kontrol)** | `GPIOE` (4, 5, 6, 7) | Hane Seçimi (Digit Select) |
-| **7-Segment (Veri)** | `GPIOE` (8, 9 ... 15) | Segment A-G ve DP |
+| **Dahili LED'ler** | `GPIOD` [12, 13, 14, 15] | Durum Göstergeleri (Yeşil, Turuncu, Kırmızı, Mavi) |
+| **Giriş Birimleri** | `GPIOA` [0, 13, 14] | User Button ve Harici Tetikleyiciler |
+| **7-Segment (MUX)** | `GPIOE` [4, 5, 6, 7] | Hane Seçimi (Digit Select / Common Pins) |
+| **7-Segment (Data)** | `GPIOE` [8 - 15] | Segment Veri Hattı (A-G, DP) |
 
 ---
 
-## 📂 Kütüphane İçeriği
+## 📂 Algoritma Kütüphanesi
 
-### 1. Modül: GPIO Output (LED Algoritmaları)
-*Klasör:* `01_GPIO_Output`  
-Bit kaydırma ve matematiksel algoritmalarla LED kontrolü.
+### 1. Modül: GPIO Output Algoritmaları
+*Konum:* `01_GPIO_Output/`  
+Bu modül, çıkış birimlerinin matematiksel ve mantıksal operatörler ile kontrolüne odaklanır.
 
-| Dosya | Açıklama | Zorluk |
+| Dosya Adı (Source Code) | Teknik Açıklama | Seviye |
 | :--- | :--- | :--- |
-| `01_sirali_akis.c` | LED'lerin sırayla yanıp söndüğü temel akış. | ⭐ |
-| `02_kara_simsek.c` | Işığın bir uçtan diğer uca gidip geldiği (Ping-Pong) efekt. | ⭐⭐ |
-| `03_binary_counter.c` | 4-Bitlik ikili sayma işlemi (0000 - 1111). | ⭐⭐⭐ |
-| `04_polis_cakari.c` | Sağ ve sol grupların sırayla çaktığı efekt. | ⭐⭐ |
-| `05_yilan_efekti.c` | Kuyruklu takip efekti (Modulo aritmetiği içerir). | ⭐⭐ |
-| `06_ozel_desen.c` | Dizi tabanlı özel animasyon oynatıcı. | ⭐⭐ |
-| `07_yukleme_cubugu.c` | LED'lerin sönmeden sırayla dolduğu "Loading" barı. | ⭐ |
-| `08_ters_binary.c` | Bitwise NOT (~) kullanılarak yapılan negatif sayıcı. | ⭐⭐⭐ |
-| `09_hayalet_iz.c` | **Software PWM** ile LED'lerde sönümleme (Ghost Trail) efekti. | ⭐⭐⭐⭐⭐ |
+| [📂 01_sirali_akis.c](./01_GPIO_Output/01_sirali_akis.c) | Temel sıralı iterasyon ve pin manipülasyonu. | Başlangıç |
+| [📂 02_kara_simsek.c](./01_GPIO_Output/02_kara_simsek.c) | Çift yönlü tarama algoritması (Ping-Pong logic). | Orta |
+| [📂 03_binary_counter.c](./01_GPIO_Output/03_binary_counter.c) | 4-Bit Binary sayıcı implementasyonu (Bitwise Shifting). | İleri |
+| [📂 04_polis_cakari.c](./01_GPIO_Output/04_polis_cakari.c) | Asenkron grup flaşör algoritması. | Orta |
+| [📂 05_yilan_efekti.c](./01_GPIO_Output/05_yilan_efekti.c) | Modulo aritmetiği ile dairesel kuyruk yapısı. | Orta |
+| [📂 06_ozel_desen.c](./01_GPIO_Output/06_ozel_desen.c) | Array-based (Dizi tabanlı) özel animasyon motoru. | Orta |
+| [📂 07_yukleme_cubugu.c](./01_GPIO_Output/07_yukleme_cubugu.c) | Kümülatif artış mantığı (Loading Bar simulation). | Başlangıç |
+| [📂 08_ters_binary.c](./01_GPIO_Output/08_ters_binary.c) | Bitwise NOT (~) operatörü ile negatif lojik. | İleri |
+| [📂 09_hayalet_iz.c](./01_GPIO_Output/09_hayalet_iz.c) | **Software PWM** ve Decay algoritması ile analog parlaklık kontrolü. | Uzman |
 
-### 2. Modül: GPIO Input (Matris & Display & Temel Buton)
-*Klasör:* `02_GPIO_Input`  
-Look-Up Table (Matris) yöntemiyle 7-Segment kontrolü, Multiplexing ve temel buton okuma mantıkları.
+### 2. Modül: GPIO Input ve Multiplexing
+*Konum:* `02_GPIO_Input/`  
+Bu modül, Look-Up Table (Matris) yönetimi, 7-Segment Multiplexing ve giriş sinyali işleme tekniklerini kapsar.
 
-| Dosya | Açıklama | Zorluk |
+| Dosya Adı (Source Code) | Teknik Açıklama | Seviye |
 | :--- | :--- | :--- |
-| `01_basit_kontrol.c` | Butona basınca tablodan veri çekip ekrana basar. | ⭐ |
-| `02_hedefli_yazdirma.c` | PA13 -> 1. Haneye, PA14 -> 2. Haneye veri yazar. | ⭐⭐ |
-| `03_butonlu_sayac.c` | **Multiplexing + Input:** Ekran taranırken sayı arttırma. | ⭐⭐⭐⭐⭐ |
-| `04_kapi_zili_basitDuzey.c` | Basınca yanar, çekince söner (Direct Drive). | ⭐ |
-| `05_akilli_lamba_basitDuzey.c` | Bas-Çek yapınca durum değiştiren (Toggle) lamba. | ⭐⭐⭐ |
-| `05_vites_kutusu_basitDuzey.c` | Her basışta modu (vitesi) değiştiren yapı. | ⭐⭐⭐ |
-| `07_guvenlik_kilidi_basitDuzey.c` | İki butona aynı anda basma kontrolü (`&&` logic). | ⭐⭐ |
-| `08_refleks_testi_basitDuzey.c` | LED yandığı anda butona basma oyunu. | ⭐⭐⭐ |
+| [📂 01_basit_kontrol.c](./02_GPIO_Input/01_basit_kontrol.c) | Look-Up Table ile temel buton-segment etkileşimi. | Başlangıç |
+| [📂 02_hedefli_yazdirma.c](./02_GPIO_Input/02_hedefli_yazdirma.c) | Input tabanlı hane (Digit) adresleme. | Orta |
+| [📂 03_butonlu_sayac.c](./02_GPIO_Input/03_butonlu_sayac.c) | **Non-Blocking** Multiplexing taraması sırasında giriş okuma. | Uzman |
+| [📂 04_kapi_zili_basitDuzey.c](./02_GPIO_Input/04_kapi_zili_basitDuzey.c) | Direct-Drive giriş kontrol mantığı. | Başlangıç |
+| [📂 05_akilli_lamba_basitDuzey.c](./02_GPIO_Input/05_akilli_lamba_basitDuzey.c) | Durum makinesi (State Machine) ile Toggle Switch yapısı. | İleri |
+| [📂 05_vites_kutusu_basitDuzey.c](./02_GPIO_Input/05_vites_kutusu_basitDuzey.c) | Switch-Case yapısı ile sıralı mod değişimi. | İleri |
+| [📂 07_guvenlik_kilidi_basitDuzey.c](./02_GPIO_Input/07_guvenlik_kilidi_basitDuzey.c) | Mantıksal AND kapısı (`&&`) ile çoklu giriş doğrulama. | Orta |
+| [📂 08_refleks_testi_basitDuzey.c](./02_GPIO_Input/08_refleks_testi_basitDuzey.c) | Tepki süresi ölçümü ve blocking-loop yönetimi. | İleri |
 
 ---
 
-## 🚀 Kurulum ve Kullanım
+## 🚀 Entegrasyon
 
-1.  Bu repoyu indirin (`Clone` veya `Download ZIP`).
-2.  İlgili klasördeki `.c` dosyasını açın.
-3.  Kodun tamamını kopyalayıp, `main.c` dosyanızdaki `while(1)` döngüsünün içine yapıştırın.
-4.  **Dikkat:** Input/Display örnekleri için `main.c` dosyasının en tepesine **Global Değişkenleri** (Look-Up tablosu vb.) eklemeyi unutmayın.
+Bu algoritmalar **STM32CubeIDE** ve **HAL Kütüphanesi** ile tam uyumludur. Kullanmak istediğiniz algoritmanın kaynak kodunu (Raw Code) projenizdeki `main.c` dosyasının `while(1)` döngüsü içerisine entegre edebilirsiniz.
+
+> **Not:** Input/Display modülleri için gerekli olan global dizi tanımlamaları (Look-Up Tables) ilgili dosyaların başlık kısmında (Header) belirtilmiştir.
 
 ---
 
-## 👨‍💻 Yazar
-**Mert** Fırat Üniversitesi - Bilgisayar Mühendisliği  
-*Embedded Systems & Computer Architecture Enthusiast*
+**Maintainer:** Mert  
+*Computer Engineering Dept. @ Fırat University*
