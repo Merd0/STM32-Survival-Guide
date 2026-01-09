@@ -1,7 +1,10 @@
 /*
  * Dosya: 04_polis_cakari.c
- * Açıklama: Sol ve Sağ grupların sırayla çaktığı polis tepe lambası efekti.
- * Yazar: Mert
+ * Açıklama: Sağlı Sollu Çakar Lamba.
+ * Mantık:
+ * 1. Faz: Sol taraf (12 ve 13) 3 kere hızlıca yanıp söner.
+ * 2. Faz: Sağ taraf (14 ve 15) 3 kere hızlıca yanıp söner.
+ * Bu işlem sürekli tekrar eder.
  */
 
 // Grup 1: Sol Taraf (12 ve 13)
