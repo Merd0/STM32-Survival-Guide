@@ -51,11 +51,10 @@ Bu modül, Look-Up Table (Matris) yönetimi, 7-Segment Multiplexing ve giriş si
 | [📂 01_basit_kontrol.c](./02_GPIO_Input/01_basit_kontrol.c) | Look-Up Table ile temel buton-segment etkileşimi. | Başlangıç |
 | [📂 02_hedefli_yazdirma.c](./02_GPIO_Input/02_hedefli_yazdirma.c) | Input tabanlı hane (Digit) adresleme. | Orta |
 | [📂 03_butonlu_sayac.c](./02_GPIO_Input/03_butonlu_sayac.c) | **Non-Blocking** Multiplexing taraması sırasında giriş okuma. | Uzman |
-| [📂 04_kapi_zili_basitDuzey.c](./02_GPIO_Input/04_kapi_zili_basitDuzey.c) | Direct-Drive giriş kontrol mantığı. | Başlangıç |
-| [📂 05_akilli_lamba_basitDuzey.c](./02_GPIO_Input/05_akilli_lamba_basitDuzey.c) | Durum makinesi (State Machine) ile Toggle Switch yapısı. | İleri |
-| [📂 05_vites_kutusu_basitDuzey.c](./02_GPIO_Input/05_vites_kutusu_basitDuzey.c) | Switch-Case yapısı ile sıralı mod değişimi. | İleri |
-| [📂 07_guvenlik_kilidi_basitDuzey.c](./02_GPIO_Input/07_guvenlik_kilidi_basitDuzey.c) | Mantıksal AND kapısı (`&&`) ile çoklu giriş doğrulama. | Orta |
-| [📂 08_refleks_testi_basitDuzey.c](./02_GPIO_Input/08_refleks_testi_basitDuzey.c) | Tepki süresi ölçümü ve blocking-loop yönetimi. | İleri |
+| [📂 04_kapi_zili_basitDüzey.c](./02_GPIO_Input/04_kapi_zili_basitDüzey.c) | Direct-Drive giriş kontrol mantığı. | Başlangıç |
+| [📂 05_akilli_lamba_basitDüzey.c](./02_GPIO_Input/05_akilli_lamba_basitDüzey.c) | Durum makinesi (State Machine) ile Toggle Switch yapısı. | İleri |
+| [📂 05_vites_kutusu_basitDüzey.c](./02_GPIO_Input/05_vites_kutusu_basitDüzey.c) | Switch-Case yapısı ile sıralı mod değişimi. | İleri |
+| [📂 07_guvenlik_kilidi_basitDüzey.c](./02_GPIO_Input/07_guvenlik_kilidi_basitDüzey.c) | Mantıksal AND kapısı (`&&`) ile çoklu giriş doğrulama. | Orta |
 
 ---
 
