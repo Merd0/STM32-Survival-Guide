@@ -1,15 +1,18 @@
 /*
  * Dosya: 03_binary_counter.c
- * Açıklama: 4-Bit Binary (İkili) Sayıcı. Bitwise Shift kullanır.
- * Yazar: Mert
+ * Açıklama: 4-Bit Binary Sayıcı (0-15 arası).
+ * Mantık:
+ * - Sayı 0: Hepsi sönük (0000)
+ * - Sayı 1: Sadece 12 yanar (0001)
+ * - Sayı 3: 12 ve 13 yanar (0011)
+ * - Sayı 15: Hepsi yanar (1111)
  */
 
-// while(1) dışındaki değişkenler:
 int sayac = 0;
 
-// while(1) içi:
+// Döngü her döndüğünde sayacı 1 arttırır
 for (int i = 0; i < 4; i++) {
-    // Sayacın i. bitini kontrol et (Maskeleme)
+    // Sayacın o anki bitine bak: 1 ise YAK, 0 ise SÖNDÜR
     if ((sayac >> i) & 1) 
         HAL_GPIO_WritePin(GPIOD, pinler[i], GPIO_PIN_SET);
     else 
@@ -17,4 +20,4 @@ for (int i = 0; i < 4; i++) {
 }
 HAL_Delay(500);
 sayac++;
-if (sayac > 15) sayac = 0; // 4 bitlik sınır
+if (sayac > 15) sayac = 0; // 15'ten sonra sıfırla
