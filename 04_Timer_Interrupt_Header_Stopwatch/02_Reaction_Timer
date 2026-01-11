@@ -1,5 +1,5 @@
 /*
- * Dosya: 01_refleks_olcer.c
+ * Dosya: 02_refleks_olcer
  * Açıklama: Rastgele bir bekleme süresinin ardından kullanıcının tepki süresini ölçer.
  * Kullanılan Teknikler: SysTick (Randomness), Input Capture mantığı.
  */
