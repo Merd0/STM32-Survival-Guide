@@ -1,0 +1,26 @@
+/*
+ * Dosya: 04_breathing_led.c
+ * Açıklama: LED parlaklığının PWM mantığı ile yumuşakça artıp azalması.
+ * Kullanılan Teknikler: PWM Simülasyonu, Duty Cycle yönetimi.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+int parlaklik = 0;
+int artis_yonu = 1; // 1: Artış, -1: Azalış
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+// Donanımsal PWM kullanılıyorsa CCR register güncellenir
+// __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, parlaklik);
+
+// Parlaklık değerini değiştir
+parlaklik += artis_yonu;
+
+// Sınır kontrolleri
+if (parlaklik >= 100) artis_yonu = -1; // Tepe noktası
+if (parlaklik <= 0)   artis_yonu = 1;  // Dip noktası
+
+HAL_Delay(10); // Efekt hızı (10ms * 100 adım = 1sn periyot)
