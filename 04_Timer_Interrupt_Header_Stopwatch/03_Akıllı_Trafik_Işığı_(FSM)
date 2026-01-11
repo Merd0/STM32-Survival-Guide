@@ -1,0 +1,68 @@
+/*
+ * Dosya: 02_trafik_isigi_fsm.c
+ * Açıklama: Durum Makinesi (FSM) kullanılarak tasarlanmış yaya kontrollü trafik ışığı.
+ * Kullanılan Teknikler: Finite State Machine, Switch-Case yapısı.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+typedef enum {
+    DURUM_KIRMIZI,
+    DURUM_SARI,
+    DURUM_YESIL,
+    DURUM_YAYA_MUDAHALESI
+} TrafikState;
+
+TrafikState mevcut_durum = DURUM_KIRMIZI;
+uint8_t yaya_istegi = 0;
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+switch (mevcut_durum)
+{
+    case DURUM_KIRMIZI:
+        HAL_GPIO_WritePin(GPIOD, RED_PIN, SET);
+        HAL_GPIO_WritePin(GPIOD, YELLOW_PIN | GREEN_PIN, RESET);
+        HAL_Delay(5000);
+        mevcut_durum = DURUM_SARI;
+        break;
+
+    case DURUM_SARI:
+        HAL_GPIO_WritePin(GPIOD, RED_PIN | GREEN_PIN, RESET);
+        HAL_GPIO_WritePin(GPIOD, YELLOW_PIN, SET);
+        HAL_Delay(2000);
+        mevcut_durum = DURUM_YESIL;
+        break;
+
+    case DURUM_YESIL:
+        HAL_GPIO_WritePin(GPIOD, GREEN_PIN, SET);
+        HAL_GPIO_WritePin(GPIOD, RED_PIN | YELLOW_PIN, RESET);
+        
+        // Yaya butonu kontrol döngüsü (Polling)
+        for(int i=0; i<100; i++) 
+        {
+            HAL_Delay(100); 
+            if(yaya_istegi == 1) 
+            {
+                mevcut_durum = DURUM_YAYA_MUDAHALESI;
+                yaya_istegi = 0;
+                break;
+            }
+        }
+        if(mevcut_durum != DURUM_YAYA_MUDAHALESI) mevcut_durum = DURUM_KIRMIZI;
+        break;
+        
+    case DURUM_YAYA_MUDAHALESI:
+        HAL_GPIO_WritePin(GPIOD, YELLOW_PIN, SET);
+        HAL_GPIO_WritePin(GPIOD, GREEN_PIN, RESET);
+        HAL_Delay(2000);
+        mevcut_durum = DURUM_KIRMIZI;
+        break;
+}
+
+// ================= INTERRUPT HANDLER (stm32f4xx_it.c) =================
+/* İlgili EXTI Handler fonksiyonu içine yerleştirilmelidir */
+
+yaya_istegi = 1; // Bayrağı kaldır
