@@ -2,83 +2,78 @@
  * Dosya: 11_kronometre_dk_sn.c
  * Senaryo: 4 Haneli Display'de Dakika ve Saniye sayar (Örn: 12:59 -> 13:00).
  * Vizyon: "Time Base" (Zaman Tabanı) kavramı.
- * İşlemciyi "Delay" ile uyutmadan, arka planda (Interrupt) zamanı sayarken
- * ön planda (Main) ekranı tarama (Multiplexing) ve matematiksel hesap yapma.
  */
 
 // ============================================================================
-// BÖLÜM 1: GLOBAL DEĞİŞKENLER
-// (Bu kısmı main.c dosyasının en üstüne, 'USER CODE BEGIN PV' alanına yaz)
+// BÖLÜM 1: MAIN.C DOSYASININ EN BAŞI
 // ============================================================================
 
+/* USER CODE BEGIN Includes */
+#include "bizimKutuphane.h"  
+/* USER CODE END Includes */
+
+/* USER CODE BEGIN PV */
 // Display'deki 4 haneyi tutan dizi: [Dk Onlar][Dk Birler] : [Sn Onlar][Sn Birler]
-// Başlangıç değeri 00:00
 int sayininBasamaklari[4] = {0, 0, 0, 0}; 
+/* USER CODE END PV */
+
 
 // ============================================================================
-// BÖLÜM 2: INTERRUPT HANDLER (KESME KODU)
-// (Bu kısmı 'stm32f4xx_it.c' dosyasında 'TIM1_UP_TIM10_IRQHandler' içine yaz)
+// BÖLÜM 2: INTERRUPT DOSYASI (stm32f4xx_it.c)
 // ============================================================================
 
-/* * Timer her 1 saniyede bir (1 Hz) kesme oluşturduğunda burası çalışır.
- * Burada SADECE en küçük birimi (Saniye Birler) artırıyoruz.
- * Karmaşık matematik işlemlerini burada yapmayıp Main'e bırakıyoruz ki
- * işlemci kesme içinde fazla vakit kaybetmesin.
- */
+/* USER CODE BEGIN Includes */
+#include "bizimKutuphane.h" // <--- BURAYA DA LAZIM! Diziye erişmek için şart.
+/* USER CODE END Includes */
+
+// Aşağıdaki fonksiyonu bulup içine ekle:
 void TIM1_UP_TIM10_IRQHandler(void)
 {
-  HAL_TIM_IRQHandler(&htim1); // Standart HAL fonksiyonu
+  HAL_TIM_IRQHandler(&htim1);
   
-  // --- SENİN KODUN BURADA BAŞLAR ---
+  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
   
   // Saniyenin birler basamağını 1 artır
-  // (Geri kalan hesaplaşmayı Main döngüsünde yapacağız)
   sayininBasamaklari[3]++; 
 
-  // --- SENİN KODUN BURADA BİTER ---
+  /* USER CODE END TIM1_UP_TIM10_IRQn 1 */
 }
 
+
 // ============================================================================
-// BÖLÜM 3: ANA DÖNGÜ VE MANTIK
-// (Bu kısmı main.c dosyasında 'while(1)' döngüsünün içine yaz)
+// BÖLÜM 3: MAIN LOOP (main.c -> while(1) içi)
 // ============================================================================
 
-/*
- * Burada "Cascade" (Zincirleme/Şelale) mantığı kuruyoruz.
- * Sağdaki basamak haddini aşarsa (Overlow), sıfırlanıp solundakini artırır.
- */
+/* USER CODE BEGIN 3 */
 
-// 1. ADIM: Saniye Birler Basamağı 10 oldu mu? (Örn: X9 -> X0)
+// 1. ADIM: Saniye Birler Basamağı 10 oldu mu?
 if(sayininBasamaklari[3] >= 10)
 {
-    sayininBasamaklari[3] = 0;       // Kendini sıfırla
-    sayininBasamaklari[2]++;         // Yanındakini (Saniye Onlar) artır
+    sayininBasamaklari[3] = 0;       // Sıfırla
+    sayininBasamaklari[2]++;         // Saniye Onlar'ı artır
     
-    // 2. ADIM: Saniye Onlar Basamağı 6 oldu mu? (Örn: 59 -> 00)
-    // Saniye 60 olamaz, 60. saniye 1 dakika eder.
+    // 2. ADIM: Saniye 60 oldu mu?
     if(sayininBasamaklari[2] >= 6)
     {
-        sayininBasamaklari[2] = 0;   // Saniye 60 olunca sıfırla
-        sayininBasamaklari[1]++;     // Dakika Birler basamağını artır
+        sayininBasamaklari[2] = 0;   
+        sayininBasamaklari[1]++;     // Dakika Birler'i artır
 
-        // 3. ADIM: Dakika Birler Basamağı 10 oldu mu? (Örn: 09:00 -> 10:00)
+        // 3. ADIM: Dakika Birler 10 oldu mu?
         if(sayininBasamaklari[1] >= 10)
         {
             sayininBasamaklari[1] = 0;
-            sayininBasamaklari[0]++; // Dakika Onlar basamağını artır
+            sayininBasamaklari[0]++; // Dakika Onlar'ı artır
 
-            // 4. ADIM: Dakika Onlar Basamağı 6 oldu mu? (Örn: 59:59 -> 00:00)
-            // İstersen burayı 10 yapıp 99 dakikaya kadar saydırabilirsin.
-            // Ama standart saat mantığında 60 dk = 1 saat (Reset)
+            // 4. ADIM: 60 Dakika doldu mu?
             if(sayininBasamaklari[0] >= 6)
             {
-               sayininBasamaklari[0] = 0; // Kronometreyi komple başa sar
+               sayininBasamaklari[0] = 0; // Başa sar
             }
         }
     }
 }
 
-// 5. ADIM: EKRANI SÜRME (DISPLAY DRIVING)
-// İşlemci saniyede binlerce kez burayı çalıştırır.
-// Timer arka planda sayarken, biz burada görüntüyü tazeleriz.
+// 5. ADIM: EKRANI SÜRME
 supur(sayininBasamaklari);
+
+/* USER CODE END 3 */
