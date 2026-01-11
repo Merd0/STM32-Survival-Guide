@@ -1,5 +1,5 @@
 /*
- * Dosya: 02_trafik_isigi_fsm.c
+ * Dosya: 03_Akıllı_Trafik_Işığı_(FSM)
  * Açıklama: Durum Makinesi (FSM) kullanılarak tasarlanmış yaya kontrollü trafik ışığı.
  * Kullanılan Teknikler: Finite State Machine, Switch-Case yapısı.
  */
