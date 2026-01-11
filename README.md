@@ -110,5 +110,13 @@ Timer projeleri için geliştirilen yardımcı yapı:
 
 ---
 
+> [!IMPORTANT]  
+> **⚠️ Kritik Uyarı: Timer Başlatma** > CubeMX üzerinden Timer ayarlarını (Prescaler, Period) yapsanız bile, kodun `main.c` dosyasında Timer'ı yazılımsal olarak başlatmazsanız kesmeler çalışmaz.
+>
+> `USER CODE BEGIN 2` bloğuna şu kodu eklemeyi unutmayın:
+> ```c
+> HAL_TIM_Base_Start_IT(&htim1); // Kullandığınız Timer kanalına göre (htim1, htim10 vs.) değişir.
+> ```
+
 **Maintainer:** Merd0 (Mert Aydın)  
 *Computer Engineering Dept. @ Fırat University*
