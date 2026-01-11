@@ -1,5 +1,5 @@
 /*
- * Dosya: 06_pomodoro.c
+ * Dosya: 07_Pomodoro_Zamanlayıcı
  * Açıklama: 25 dakikadan geriye sayan çalışma zamanlayıcısı.
  * Kullanılan Teknikler: Geri sayım algoritması, Alarm flag yönetimi.
  */
