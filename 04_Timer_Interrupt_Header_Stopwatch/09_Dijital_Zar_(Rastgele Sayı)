@@ -1,5 +1,5 @@
 /*
- * Dosya: 09_dijital_zar.c
+ * Dosya: 09_Dijital_Zar_(Rastgele Sayı)
  * Açıklama: Butona basılı tutulduğunda sayılar hızla döner, bırakıldığında durur.
  * Kullanılan Teknikler: UX (Kullanıcı Deneyimi), Modulo Aritmetiği.
  */
