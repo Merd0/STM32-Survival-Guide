@@ -1,0 +1,50 @@
+/*
+ * Dosya: 06_pomodoro.c
+ * Açıklama: 25 dakikadan geriye sayan çalışma zamanlayıcısı.
+ * Kullanılan Teknikler: Geri sayım algoritması, Alarm flag yönetimi.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+int dakika = 25;
+int saniye = 0;
+uint8_t sure_bitti_mi = 0;
+
+// ================= INTERRUPT HANDLER (stm32f4xx_it.c -> Timer IRQ) =================
+/* Timer 1 saniyelik kesme oluşturduğunda çalışır */
+
+if(sure_bitti_mi == 0)
+{
+    if (saniye == 0) 
+    {
+        if (dakika == 0) 
+        {
+            sure_bitti_mi = 1; // Süre doldu
+        } 
+        else 
+        {
+            dakika--;
+            saniye = 59; // Dakikadan borç al
+        }
+    } 
+    else 
+    {
+        saniye--;
+    }
+}
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+if(sure_bitti_mi)
+{
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15); // Alarm LED
+    HAL_Delay(200);
+    goster(0000); 
+}
+else
+{
+    // Süreyi dakika ve saniye olarak birleştirip göster
+    goster(dakika * 100 + saniye); 
+}
