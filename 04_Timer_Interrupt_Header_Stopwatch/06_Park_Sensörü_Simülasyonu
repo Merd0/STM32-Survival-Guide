@@ -1,0 +1,32 @@
+/*
+ * Dosya: 05_park_sensoru.c
+ * Açıklama: Mesafeye göre sesli ikaz sıklığını değiştiren algoritma.
+ * Kullanılan Teknikler: Data Mapping (Veri Haritalama).
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+uint32_t mesafe = 100; // Sensörden gelen veri (cm)
+int buzzer_bekleme = 0;
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+// Mesafeye göre bekleme süresini haritala
+if (mesafe < 10) buzzer_bekleme = 50;       // Kritik mesafe
+else if (mesafe < 50) buzzer_bekleme = 200; // Yakın mesafe
+else buzzer_bekleme = 1000;                 // Uzak mesafe
+
+// Buzzer kontrolü
+if(mesafe < 100)
+{
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, SET);
+    HAL_Delay(50); // Ses süresi sabit
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, RESET);
+    HAL_Delay(buzzer_bekleme); // Sessizlik süresi değişken
+}
+
+// Simülasyon değişimi
+mesafe -= 5;
+if(mesafe <= 0) mesafe = 120;
