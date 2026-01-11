@@ -1,0 +1,31 @@
+/*
+ * Dosya: 10_menu_sistemi.c
+ * Açıklama: Tek buton ile farklı ekran modları arasında geçiş yapar.
+ * Kullanılan Teknikler: State Management (Durum Yönetimi), Multitasking.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+int menu_modu = 0; // 0: Saat, 1: Sıcaklık, 2: Nem
+
+// ================= INTERRUPT HANDLER (stm32f4xx_it.c) =================
+/* İlgili Button EXTI Handler fonksiyonu içine yerleştirilmelidir */
+
+menu_modu++;
+if(menu_modu > 2) menu_modu = 0; // Başa sar (Wrap around)
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+switch(menu_modu) {
+    case 0:
+        goster(1230); // Saat Örneği
+        break;
+    case 1:
+        goster(24);   // Sıcaklık Örneği
+        break;
+    case 2:
+        goster(60);   // Nem Örneği
+        break;
+}
