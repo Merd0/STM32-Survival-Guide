@@ -1,5 +1,5 @@
 /*
- * Dosya: 05_park_sensoru.c
+ * Dosya: 06_Park_Sensörü_Simülasyonu
  * Açıklama: Mesafeye göre sesli ikaz sıklığını değiştiren algoritma.
  * Kullanılan Teknikler: Data Mapping (Veri Haritalama).
  */
