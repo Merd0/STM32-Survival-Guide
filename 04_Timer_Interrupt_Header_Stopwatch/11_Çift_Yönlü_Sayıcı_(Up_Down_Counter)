@@ -1,0 +1,33 @@
+/*
+ * Dosya: 11_up_down_counter
+ * Açıklama: Artırma ve azaltma butonları ile sayaç kontrolü.
+ * Kullanılan Teknikler: Edge Case (Sınır Durumu) kontrolü, Debounce.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+int sayac = 0;
+
+// ================= INTERRUPT HANDLER (stm32f4xx_it.c) =================
+/* EXTI0 (Artırma) ve EXTI1 (Azaltma) Handler fonksiyonları */
+
+// --- Artırma Butonu Handler ---
+void EXTI0_IRQHandler(void) {
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+    // Üst sınır kontrolü (Overflow koruması)
+    if(sayac < 9999) sayac++;
+}
+
+// --- Azaltma Butonu Handler ---
+void EXTI1_IRQHandler(void) {
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+    // Alt sınır kontrolü (Underflow koruması)
+    // Sayı 0 ise azaltma işlemi yapılmaz
+    if(sayac > 0) sayac--;
+}
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+goster(sayac);
