@@ -1,5 +1,5 @@
 /*
- * Dosya: 11_kronometre_dk_sn.c
+ * Dosya: 01_kronometre_dk_sn
  * Senaryo: 4 Haneli Display'de Dakika ve Saniye sayar (Örn: 12:59 -> 13:00).
  * Vizyon: "Time Base" (Zaman Tabanı) kavramı.
  */
