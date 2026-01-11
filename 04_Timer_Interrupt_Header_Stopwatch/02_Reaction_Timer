@@ -1,0 +1,45 @@
+/*
+ * Dosya: 01_refleks_olcer.c
+ * Açıklama: Rastgele bir bekleme süresinin ardından kullanıcının tepki süresini ölçer.
+ * Kullanılan Teknikler: SysTick (Randomness), Input Capture mantığı.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+uint32_t baslangic_zamani = 0;
+uint32_t gecen_sure = 0;
+uint8_t oyun_durumu = 0; // 0: Bekliyor, 1: Ölçüm Başladı, 2: Sonuç Göster
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+if(oyun_durumu == 0)
+{
+    // Pseudo-Random bekleme süresi üretimi (2000ms - 5000ms arası)
+    uint32_t rastgele_bekleme = 2000 + (HAL_GetTick() % 3000); 
+    
+    HAL_Delay(rastgele_bekleme); 
+    
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET); // LED'i Yak (Start)
+    
+    baslangic_zamani = HAL_GetTick(); // Zamanı başlat
+    oyun_durumu = 1; // Input bekleme moduna geç
+}
+
+if(oyun_durumu == 2)
+{
+    goster(gecen_sure); // Sonucu display'e yaz
+}
+
+// ================= INTERRUPT HANDLER (stm32f4xx_it.c) =================
+/* İlgili EXTI Handler fonksiyonu içine yerleştirilmelidir */
+
+if(oyun_durumu == 1)
+{
+    uint32_t bitis_zamani = HAL_GetTick();
+    gecen_sure = bitis_zamani - baslangic_zamani; // Farkı hesapla
+    
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET); // LED'i söndür
+    oyun_durumu = 2; // Sonuç gösterme moduna geç
+}
