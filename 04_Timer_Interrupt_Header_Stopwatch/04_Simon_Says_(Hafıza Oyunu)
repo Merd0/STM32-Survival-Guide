@@ -1,5 +1,5 @@
 /*
- * Dosya: 03_simon_says.c
+ * Dosya: 04_Simon_Says_(Hafıza Oyunu)
  * Açıklama: Rastgele üretilen LED dizisini kullanıcının tekrar etmesi gereken hafıza oyunu.
  * Kullanılan Teknikler: Dizi (Array) yönetimi, Algoritma kurma.
  */
