@@ -1,5 +1,5 @@
 /*
- * Dosya: 11_up_down_counter
+ * Dosya: 11_Çift_Yönlü_Sayıcı_(Up_Down_Counter)
  * Açıklama: Artırma ve azaltma butonları ile sayaç kontrolü.
  * Kullanılan Teknikler: Edge Case (Sınır Durumu) kontrolü, Debounce.
  */
