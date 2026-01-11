@@ -1,0 +1,28 @@
+/*
+ * Dosya: 09_dijital_zar.c
+ * Açıklama: Butona basılı tutulduğunda sayılar hızla döner, bırakıldığında durur.
+ * Kullanılan Teknikler: UX (Kullanıcı Deneyimi), Modulo Aritmetiği.
+ */
+
+#include "bizimKutuphane.h"
+
+// ================= GLOBAL DEĞİŞKENLER =================
+int zar_degeri = 1;
+
+// ================= ANA DÖNGÜ (Main Loop) =================
+/* Bu blok while(1) içine yerleştirilmelidir */
+
+if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET) 
+{
+    // Animasyon Modu: Sayıları hızla değiştir
+    zar_degeri++;
+    if(zar_degeri > 6) zar_degeri = 1;
+    
+    goster(zar_degeri); 
+    HAL_Delay(20); // Göz yanılması için kısa gecikme
+} 
+else 
+{
+    // Durma Modu: Son değeri göster
+    goster(zar_degeri);
+}
