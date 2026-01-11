@@ -1,5 +1,5 @@
 /*
- * Dosya: 07_morse_code.c
+ * Dosya: 08_Mors_Alfabesi_Çevirici
  * Açıklama: Metin verisini (String) Mors sinyaline dönüştürür.
  * Kullanılan Teknikler: String işleme, İletişim protokolü mantığı.
  */
