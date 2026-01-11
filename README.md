@@ -8,83 +8,93 @@
 ## 📖 Repo Özeti
 Bu depo, **Fırat Üniversitesi Bilgisayar Mühendisliği** müfredatını desteklemek ve gömülü sistemler dünyasına adım atan mühendisler için oluşturulmuş kapsamlı bir algoritma kütüphanesidir.
 
-Proje, STM32 mimarisi üzerinde **GPIO**, **External Interrupts (EXTI)**, **Timer Interrupts** ve **Endüstriyel Algoritmalar** konularını kapsar. Basit pin kontrolünden başlayıp, öncelik yönetimi (NVIC), debouncing ve zamanlayıcı tabanlı multitasking yapılarına kadar uzanan optimize edilmiş C kodlarını barındırır.
-
 ---
+
 ## 📂 Algoritma Kütüphanesi
 
-### 1. Modül: GPIO Output (Dijital Çıkış) 
+### 1. Modül: GPIO Output (Dijital Çıkış)
 *Konum:* [`01_GPIO_Output/`](./01_GPIO_Output/)
 
-| Dosya Adı | Proje & Açıklama | Zorluk |
-| :--- | :--- | :---: |
-| [`01_sirali_akis.c`](./01_GPIO_Output/01_sirali_akis.c) |  **Sıralı Akış**<br>Temel `for` döngüsü ve pin kontrolü. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`02_kara_simsek.c`](./01_GPIO_Output/02_kara_simsek.c) |  **Kara Şimşek**<br>Çift yönlü tarama (Ping-Pong) algoritması. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`03_binary_counter.c`](./01_GPIO_Output/03_binary_counter.c) |  **Binary Counter**<br>4-Bit Binary sayıcı (Bitwise Shifting). | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`04_polis_cakari.c`](./01_GPIO_Output/04_polis_cakari.c) |  **Polis Çakar**<br>Asenkron grup flaşör mantığı. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`05_yilan_efekti.c`](./01_GPIO_Output/05_yilan_efekti.c) |  **Yılan Efekti**<br>Dairesel kuyruk yapısı (Circular Buffer logic). | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`06_ozel_desen.c`](./01_GPIO_Output/06_ozel_desen.c) |  **Özel Desen**<br>Dizi (Array) tabanlı animasyon motoru. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`07_yukleme_cubugu.c`](./01_GPIO_Output/07_yukleme_cubugu.c) |  **Loading Bar**<br>Kümülatif artış simülasyonu. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`08_ters_binary.c`](./01_GPIO_Output/08_ters_binary.c) |  **Ters Binary**<br>Bitwise NOT (`~`) operatörü ile negatif lojik. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`09_hayalet_iz.c`](./01_GPIO_Output/09_hayalet_iz.c) |  **Hayalet İz**<br>Software PWM ve Decay algoritması. | ![](https://img.shields.io/badge/-Uzman-blueviolet?style=flat-square) |
+| Dosya Adı | Açıklama | Seviye |
+| :--- | :--- | :--- |
+| [`01_sirali_akis.c`](./01_GPIO_Output/01_sirali_akis.c) | Temel for döngüsü ve pin kontrolü. | Başlangıç |
+| [`02_kara_simsek.c`](./01_GPIO_Output/02_kara_simsek.c) | Çift yönlü tarama (Ping-Pong) algoritması. | Orta |
+| [`03_binary_counter.c`](./01_GPIO_Output/03_binary_counter.c) | 4-Bit Binary sayıcı (Bitwise Shifting). | İleri |
+| [`04_polis_cakari.c`](./01_GPIO_Output/04_polis_cakari.c) | Asenkron grup flaşör mantığı. | Orta |
+| [`05_yilan_efekti.c`](./01_GPIO_Output/05_yilan_efekti.c) | Dairesel kuyruk yapısı (Circular Buffer logic). | Orta |
+| [`06_ozel_desen.c`](./01_GPIO_Output/06_ozel_desen.c) | Dizi (Array) tabanlı animasyon motoru. | Orta |
+| [`07_yukleme_cubugu.c`](./01_GPIO_Output/07_yukleme_cubugu.c) | Kümülatif artış (Loading Bar) simülasyonu. | Başlangıç |
+| [`08_ters_binary.c`](./01_GPIO_Output/08_ters_binary.c) | Bitwise NOT (~) operatörü ile negatif lojik. | İleri |
+| [`09_hayalet_iz.c`](./01_GPIO_Output/09_hayalet_iz.c) | Software PWM ve Decay algoritması. | Uzman |
 
-### 2. Modül: GPIO Input (Dijital Giriş) 🔘
+### 2. Modül: GPIO Input (Dijital Giriş)
 *Konum:* [`02_GPIO_Input/`](./02_GPIO_Input/)
 
-| Dosya Adı | Proje & Açıklama | Zorluk |
-| :--- | :--- | :---: |
-| [`01_basit_kontrol.c`](./02_GPIO_Input/01_basit_kontrol.c) |  **Basit I/O**<br>Butona basınca LED yakma. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`02_hedefli_yazdirma.c`](./02_GPIO_Input/02_hedefli_yazdirma.c) |  **Hedefli Kontrol**<br>Girişe göre belirli 7-segment hanesini yakma. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`03_butonlu_sayac.c`](./02_GPIO_Input/03_butonlu_sayac.c) |  **Butonlu Sayaç**<br>Buton ile sayı artırma (Basit Sayaç). | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`04_kapi_zili...`](./02_GPIO_Input/04_kapi_zili_basitDüzey.c) |  **Kapı Zili**<br>Bas-Çek mantığı (Push-Button Logic). | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`05_akilli_lamba...`](./02_GPIO_Input/05_akilli_lamba_basitDüzey.c) |  **Akıllı Lamba**<br>Toggle (Anahtar) mantığı oluşturma. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`06_vites_kutusu...`](./02_GPIO_Input/06_vites_kutusu_basitDüzey.c) |  **Vites Kutusu**<br>Switch-Case ile sıralı mod değişimi. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`07_guvenlik_kilidi...`](./02_GPIO_Input/07_guvenlik_kilidi_basitDüzey.c) |  **Güvenlik Kilidi**<br>Mantıksal VE (`&&`) ile çoklu giriş doğrulama. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`08_refleks_testi...`](./02_GPIO_Input/08_refleks_testi_basitDüzey.c) |  **Refleks Testi**<br>Basit tepki ölçüm mantığı. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
+| Dosya Adı | Açıklama | Seviye |
+| :--- | :--- | :--- |
+| [`01_basit_kontrol.c`](./02_GPIO_Input/01_basit_kontrol.c) | Butona basınca LED yakma. | Başlangıç |
+| [`02_hedefli_yazdirma.c`](./02_GPIO_Input/02_hedefli_yazdirma.c) | Girişe göre belirli 7-segment hanesini yakma. | Orta |
+| [`03_butonlu_sayac.c`](./02_GPIO_Input/03_butonlu_sayac.c) | Buton ile sayı artırma (Basit Sayaç). | Orta |
+| [`04_kapi_zili_basitDüzey.c`](./02_GPIO_Input/04_kapi_zili_basitDüzey.c) | Bas-Çek mantığı (Push-Button Logic). | Başlangıç |
+| [`05_akilli_lamba_basitDüzey.c`](./02_GPIO_Input/05_akilli_lamba_basitDüzey.c) | Toggle (Anahtar) mantığı oluşturma. | İleri |
+| [`05_vites_kutusu_basitDüzey.c`](./02_GPIO_Input/05_vites_kutusu_basitDüzey.c) | Switch-Case ile sıralı mod değişimi. | İleri |
+| [`07_guvenlik_kilidi_basitDüzey.c`](./02_GPIO_Input/07_guvenlik_kilidi_basitDüzey.c) | Mantıksal VE (`&&`) ile çoklu giriş doğrulama. | Orta |
+| [`08_refleks_testi_basitDüzey.c`](./02_GPIO_Input/08_refleks_testi_basitDüzey.c) | Basit tepki ölçüm mantığı. | Başlangıç |
 
-### 3. Modül: Interrupts & EXTI (Dış Kesmeler) 
+### 3. Modül: Interrupts & EXTI (Dış Kesmeler)
 *Konum:* [`03_Interrupts_EXTI/`](./03_Interrupts_EXTI/)
 
-| Dosya Adı | Proje & Açıklama | Zorluk |
-| :--- | :--- | :---: |
-| [`01_temel_kesme.c`](./03_Interrupts_EXTI/01_temel_kesme.c) |  **Temel Kesme**<br>`HAL_GPIO_EXTI_Callback` kullanımı. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`02_debounce_cozumu.c`](./03_Interrupts_EXTI/02_debounce_cozumu.c) |  **Debounce**<br>Millis() tabanlı buton arkı engelleme. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`01_mod_degistirici.c`](./03_Interrupts_EXTI/Interrupts_OrtaSeviye/01_mod_degistirici.c) |  **Mod Değiştirici**<br>Kesme ile çalışma modu değiştirme. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`03_acil_durum_freni.c`](./03_Interrupts_EXTI/Interrupts_OrtaSeviye/03_acil_durum_freni.c) |  **Emergency Stop**<br>Sistemsel kilitleme mekanizması. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`01_sanal_encoder.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/01_sanal_encoder.c) |  **Sanal Encoder**<br>İki butonla Rotary Encoder simülasyonu. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`02_endustriyel_stop.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/02_endustriyel_stop.c) |  **Safety Logic**<br>Reset gerektiren endüstriyel durdurma. | ![](https://img.shields.io/badge/-Uzman-blueviolet?style=flat-square) |
-| [`03_kasa_sifresi.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/03_kasa_sifresi.c) |  **Kasa Şifresi**<br>Sıralı giriş doğrulama algoritması. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`04_motor_koruma.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/04_motor_koruma.c) |  **Motor Koruma**<br>Cool-down (Soğuma süresi) koruması. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`05_paketleme_bandi.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/05_paketleme_bandi.c) |  **Paketleme Bandı**<br>Sensör sayacı ve Batch kontrolü. | ![](https://img.shields.io/badge/-Uzman-blueviolet?style=flat-square) |
+**Temel Dosyalar (Root):**
+| Dosya Adı | Açıklama |
+| :--- | :--- |
+| [`01_temel_kesme.c`](./03_Interrupts_EXTI/01_temel_kesme.c) | `HAL_GPIO_EXTI_Callback` kullanımı. |
+| [`02_debounce_cozumu.c`](./03_Interrupts_EXTI/02_debounce_cozumu.c) | Millis() tabanlı buton arkı engelleme. |
+| [`03_oncelik_savasi_preemption.c`](./03_Interrupts_EXTI/03_oncelik_savasi_preemption.c) | Preemption Priority testi. |
+| [`04_esit_oncelik_subpriority.c`](./03_Interrupts_EXTI/04_esit_oncelik_subpriority.c) | Sub-Priority davranışı. |
 
-### 4. Modül: Timer Interrupts & Algorithms 
+**Orta Seviye (Subfolder):**
+| Dosya Adı | Açıklama |
+| :--- | :--- |
+| [`01_mod_degistirici.c`](./03_Interrupts_EXTI/Interrupts_OrtaSeviye/01_mod_degistirici.c) | Kesme ile çalışma modu değiştirme. |
+| [`02_bayrak_yarisi.c`](./03_Interrupts_EXTI/Interrupts_OrtaSeviye/02_bayrak_yarisi.c) | Volatile flag kullanımı. |
+| [`03_acil_durum_freni.c`](./03_Interrupts_EXTI/Interrupts_OrtaSeviye/03_acil_durum_freni.c) | Sistemsel kilitleme mekanizması. |
+
+**İleri Seviye (Subfolder):**
+| Dosya Adı | Açıklama |
+| :--- | :--- |
+| [`01_sanal_encoder.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/01_sanal_encoder.c) | İki butonla Rotary Encoder simülasyonu. |
+| [`02_endustriyel_stop.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/02_endustriyel_stop.c) | Safety Logic ve Reset mantığı. |
+| [`03_kasa_sifresi.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/03_kasa_sifresi.c) | Sıralı giriş doğrulama algoritması. |
+| [`04_motor_koruma.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/04_motor_koruma.c) | Cool-down (Soğuma süresi) koruması. |
+| [`05_paketleme_bandi.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/05_paketleme_bandi.c) | Sensör sayacı ve Batch kontrolü. |
+| [`06_double_click.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/06_double_click.c) | Çift tıklama algılama. |
+
+### 4. Modül: Timer Interrupts & Algorithms
 *Konum:* [`04_Timer_Interrupt_Header_Stopwatch/`](./04_Timer_Interrupt_Header_Stopwatch/)
 
-| Dosya Adı | Proje & Açıklama | Zorluk |
-| :--- | :--- | :---: |
-| [`01_dk_sn_kronometre.c`](./04_Timer_Interrupt_Header_Stopwatch/01_dk_sn_kronometre.c) |  **Kronometre**<br>Ana Proje: Timer Interrupt & Multiplexing. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`02_Reaction_Timer.c`](./04_Timer_Interrupt_Header_Stopwatch/02_Reaction_Timer.c) |  **Refleks Ölçer**<br>Randomness & Input Capture. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`03_Akıllı_Trafik...c`](./04_Timer_Interrupt_Header_Stopwatch/03_Akıllı_Trafik_Işığı_(FSM).c) |  **Trafik Işığı**<br>Finite State Machine (FSM) mimarisi. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`04_Simon_Says...c`](./04_Timer_Interrupt_Header_Stopwatch/04_Simon_Says_(Hafıza_Oyunu).c) |  **Hafıza Oyunu**<br>Dizi yönetimi ve oyun mantığı. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`05_Breathing_LED...c`](./04_Timer_Interrupt_Header_Stopwatch/05_Nefes_Alan_Işık_(Breathing_LED).c) |  **Breathing LED**<br>PWM simülasyonu. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`06_Park_Sensoru...c`](./04_Timer_Interrupt_Header_Stopwatch/06_Park_Sensörü_Simülasyonu.c) | **Park Sensörü**<br>Data Mapping ve sesli ikaz. | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`07_Pomodoro...c`](./04_Timer_Interrupt_Header_Stopwatch/07_Pomodoro_Zamanlayıcı.c) |  **Pomodoro**<br>Geri sayım (Count-Down). | ![](https://img.shields.io/badge/-Orta-warning?style=flat-square) |
-| [`08_Mors_Cevirici...c`](./04_Timer_Interrupt_Header_Stopwatch/08_Mors_Alfabesi_Çevirici.c) |  **Mors Kodu**<br>Text-to-Signal işleme. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`09_Dijital_Zar...c`](./04_Timer_Interrupt_Header_Stopwatch/09_Dijital_Zar_(Rastgele_Sayı).c) |  **Dijital Zar**<br>UX ve Modulo aritmetiği. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
-| [`10_Menu_Kontrol...c`](./04_Timer_Interrupt_Header_Stopwatch/10_Butonla_Menü_Kontrolü.c) |  **Menü Sistemi**<br>State Management ve Multitasking. | ![](https://img.shields.io/badge/-İleri-critical?style=flat-square) |
-| [`11_Up_Down...c`](./04_Timer_Interrupt_Header_Stopwatch/11_Çift_Yönlü_Sayıcı_(Up_Down_Counter).c) |  **İleri/Geri Sayaç**<br>Edge Case & Overflow koruması. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
+| Dosya Adı | Proje & Açıklama | Seviye |
+| :--- | :--- | :--- |
+| [`01_dk_sn_kronometre`](./04_Timer_Interrupt_Header_Stopwatch/01_dk_sn_kronometre) | **Ana Proje:** Timer Interrupt & Multiplexing. | Orta |
+| [`02_Reaction_Timer`](./04_Timer_Interrupt_Header_Stopwatch/02_Reaction_Timer) | **Refleks Ölçer:** Randomness & Input Capture. | Başlangıç |
+| [`03_Akıllı_Trafik_Işığı_(FSM)`](./04_Timer_Interrupt_Header_Stopwatch/03_Akıllı_Trafik_Işığı_(FSM)) | **Trafik Işığı:** Finite State Machine (FSM). | İleri |
+| [`04_Simon_Says_(Hafıza Oyunu)`](./04_Timer_Interrupt_Header_Stopwatch/04_Simon_Says_(Hafıza%20Oyunu)) | **Hafıza Oyunu:** Dizi yönetimi. | Orta |
+| [`05_Nefes_Alan_Işık_(Breathing LED)`](./04_Timer_Interrupt_Header_Stopwatch/05_Nefes_Alan_Işık_(Breathing%20LED)) | **Breathing LED:** PWM simülasyonu. | Orta |
+| [`06_Park_Sensörü_Simülasyonu`](./04_Timer_Interrupt_Header_Stopwatch/06_Park_Sensörü_Simülasyonu) | **Park Sensörü:** Data Mapping. | Orta |
+| [`07_Pomodoro_Zamanlayıcı`](./04_Timer_Interrupt_Header_Stopwatch/07_Pomodoro_Zamanlayıcı) | **Pomodoro:** Geri sayım (Count-Down). | Orta |
+| [`08_Mors_Alfabesi_Çevirici`](./04_Timer_Interrupt_Header_Stopwatch/08_Mors_Alfabesi_Çevirici) | **Mors Kodu:** Text-to-Signal işleme. | İleri |
+| [`09_Dijital_Zar_(Rastgele Sayı)`](./04_Timer_Interrupt_Header_Stopwatch/09_Dijital_Zar_(Rastgele%20Sayı)) | **Dijital Zar:** UX ve Modulo aritmetiği. | Başlangıç |
+| [`10_Butonla_Menü_Kontrolü`](./04_Timer_Interrupt_Header_Stopwatch/10_Butonla_Menü_Kontrolü) | **Menü Sistemi:** State Management. | İleri |
+| [`11_Çift_Yönlü_Sayıcı_(Up_Down_Counter)`](./04_Timer_Interrupt_Header_Stopwatch/11_Çift_Yönlü_Sayıcı_(Up_Down_Counter)) | **Sayaç:** Edge Case & Overflow koruması. | Başlangıç |
 
 ---
 
 ## 🏛️ Kütüphane Yapısı
 Timer projeleri için geliştirilen yardımcı yapı:
 1.  **`bizimKutuphane.h`:** 7-Segment Multiplexing ve basamak ayırma motoru.
-2.  **`stm32f4xx_it.c`:** Zamanlayıcı kesmesi (1Hz) ile arka plan sayıcı tetikleme.
+2.  **`stm32f4xx_it.c`:** Zamanlayıcı kesmesi ile arka plan sayıcı tetikleme.
 3.  **`main.c`:** Ön plan (Foreground) tarama ve mantıksal kontrol döngüsü.
 
 ---
 
-**Maintainer:** Merd0 (Mert Aydın)  
-*Computer Engineering Dept. @ Fırat University*
 **Maintainer:** Merd0 (Mert Aydın)  
 *Computer Engineering Dept. @ Fırat University*
