@@ -1,5 +1,5 @@
 /*
- * Dosya: 10_menu_sistemi.c
+ * Dosya: 10_Butonla_Menü_Kontrolü
  * Açıklama: Tek buton ile farklı ekran modları arasında geçiş yapar.
  * Kullanılan Teknikler: State Management (Durum Yönetimi), Multitasking.
  */
