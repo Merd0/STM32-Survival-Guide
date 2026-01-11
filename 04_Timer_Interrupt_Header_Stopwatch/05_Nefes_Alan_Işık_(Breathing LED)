@@ -1,5 +1,5 @@
 /*
- * Dosya: 04_breathing_led.c
+ * Dosya: 05_Nefes_Alan_Işık_(Breathing LED)
  * Açıklama: LED parlaklığının PWM mantığı ile yumuşakça artıp azalması.
  * Kullanılan Teknikler: PWM Simülasyonu, Duty Cycle yönetimi.
  */
