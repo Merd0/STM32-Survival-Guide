@@ -16,8 +16,8 @@ Bu yol haritası, depodaki C örneklerini temel düzeyden ileri seviyeye doğru 
 
 ## Modül sırası
 
-1. [GPIO Output](README.tr.md#1-modül-gpio-output-dijital-çıkış-) — LED desenleri ve binary sayaçlar.
-2. [GPIO Input](README.tr.md#2-modül-gpio-input-dijital-giriş-) — buton ve durum yönetimi.
+1. [GPIO Output](README.tr.md) — LED desenleri ve binary sayaçlar.
+2. [GPIO Input](README.tr.md) — buton ve durum yönetimi.
 3. [EXTI / NVIC](03_Interrupts_EXTI/README.tr.md) — temel kesme ve öncelikler.
 4. [Orta seviye kesmeler](03_Interrupts_EXTI/Interrupts_OrtaSeviye/README.tr.md) — bayraklar ve iş devri.
 5. [İleri seviye kesmeler](03_Interrupts_EXTI/Interrupts_%C4%B0leriSeviye/README.tr.md) — olay odaklı senaryolar.
