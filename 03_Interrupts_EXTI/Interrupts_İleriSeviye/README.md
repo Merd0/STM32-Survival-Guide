@@ -1,51 +1,44 @@
-# 🚀 Mühendislik Vizyonu: Gerçek Hayat Senaryoları (Real-World Logic)
+# Advanced Interrupt Exercises — Event-Driven Scenarios
 
-![Level](https://img.shields.io/badge/Level-Professional-red?style=flat-square)
-![Focus](https://img.shields.io/badge/Focus-System_Safety_%26_UX-blue?style=flat-square)
-![Concept](https://img.shields.io/badge/Concept-Event_Driven-green?style=flat-square)
+**English | [Türkçe](README.tr.md)**
 
-## 👁️ Vizyon ve Amaç
-Bir gömülü yazılım mühendisini, hobi devreleri kuran birinden ayıran temel fark **kodun karmaşıklığı değil, senaryonun gerçekçiliğidir.**
+![Focus](https://img.shields.io/badge/focus-event--driven%20logic-blue)
+![Scope](https://img.shields.io/badge/scope-educational%20examples-lightgrey)
 
-Bu modül, basit bir "LED Yak/Söndür" uygulamasının ötesine geçerek; **endüstriyel güvenlik standartlarını**, **donanım koruma protokollerini** ve **kullanıcı deneyimi (UX)** algoritmalarını simüle eder.
+These exercises go beyond basic GPIO operations to model input sequences, timing, state transitions, and abnormal operating conditions.
 
-Buradaki amaç, yazılıma şu soruları sordurabilmektir:
-* *"Kullanıcı butona basılı tutarsa sistem bozulur mu?"*
-* *"Acil durumda sistem kendini kilitleyebiliyor mu?"*
-* *"Operatör hata yaparsa donanım yanar mı?"*
+Ask questions such as: What happens if a button is held down? Can an application remember that a stop was requested? How should it respond to unexpected input or a too-early restart?
 
----
+## Scenarios and techniques
 
-## 🏭 Endüstriyel Senaryolar ve Çözümler
+| Source | Scenario | Technique |
+| --- | --- | --- |
+| [01_sanal_encoder.c](01_sanal_encoder.c) | Restrict values such as a volume control or motion command to a permissible range | **Clamping:** limit values to min/max bounds |
+| [02_endustriyel_stop.c](02_endustriyel_stop.c) | Avoid automatically resuming an application after a stop event | **Latching:** require an explicit re-arm action |
+| [03_kasa_sifresi.c](03_kasa_sifresi.c) | Recognize a specific input sequence, such as A → B → A | **Finite-state machine:** advance on correct inputs, reset on invalid sequences |
+| [04_motor_koruma.c](04_motor_koruma.c) | Prevent an immediate restart after shutdown | **Cooldown:** check elapsed time since the last stop |
+| [05_paketleme_bandi.c](05_paketleme_bandi.c) | Count products and act after a batch threshold | **Event counting and process control** |
+| [06_double_click.c](06_double_click.c) | Distinguish one click from a double-click | **Timing:** compare event intervals |
 
-Bu klasördeki her kod parçası, fabrikalarda veya tüketici elektroniğinde karşılaşılan somut bir probleme çözüm üretir.
+## What you should learn
 
-| Dosya | Problem (Gerçek Hayat) | Mühendislik Çözümü | Vizyon |
-| :--- | :--- | :--- | :--- |
-| [📂 01_sanal_encoder.c](./01_sanal_encoder.c) | **Sınır İhlali:** Ses sisteminde sesi 100'den yukarı açmaya çalışmak veya robot kolu fiziksel sınırın ötesine zorlamak. | **Clamping (Sınırlandırma):** Değerleri min/max aralığına hapseder. Kullanıcı zorlasa bile yazılım donanımı korur. | 🛡️ Sınır Yönetimi |
-| [📂 02_endustriyel_stop.c](./02_endustriyel_stop.c) | **Güvenlik Riski:** Pres makinesinde elini kaptıran işçi butona basar, elini çekince makine tekrar çalışmamalıdır. | **Latching (Mühürleme):** Sistem "Hata Moduna" geçer. Yetkili personel "Reset" atana kadar sistem kilitli kalır. | 🚨 İş Güvenliği (Safety) |
-| [📂 03_kasa_sifresi.c](./03_kasa_sifresi.c) | **Sıralı İşlem:** Bir kasanın veya nükleer ateşleme sisteminin belirli bir sıra (A->B->A) ile çalışması gerekir. | **Finite State Machine (FSM):** Her basış sistemi bir sonraki duruma taşır. Hata yapılırsa sistem başa döner. | 🔐 Algoritma Mantığı |
-| [📂 04_motor_koruma.c](./04_motor_koruma.c) | **Donanım Hasarı:** Dev motorlar veya ısıtıcılar aniden kapatılıp hemen geri açılamaz (Deşarj süresi). | **Cool-Down (Soğuma):** Yazılım, son kapanma süresini hafızada tutar ve güvenli süre geçmeden yeniden başlatmayı reddeder. | ❄️ Donanım Ömrü |
-| [📂 05_paketleme_bandi.c](./05_paketleme_bandi.c) | **Otomasyon:** Üretim bandında ürünleri tek tek sayıp kolilemek gerekir. | **Process Automation:** Belirli bir eşik değere (Threshold) ulaşınca tetiklenir ve sistemi otomatik sıfırlar. | 📦 Üretim Takibi |
-| [📂 06_double_click.c](./06_double_click.c) | **Kullanıcı Deneyimi:** Tek bir butonla birden fazla komut (Seç/Aç) vermek. | **Time-Domain Analysis:** İki sinyal arasındaki süreyi (dt) ölçerek kullanıcın niyetini (Tek tık vs Çift tık) anlar. | 🖱️ HMI / UX |
+1. **State retention:** track previous events using application state, including appropriate `static` variables.
+2. **Timing decisions:** avoid blocking delays in ISRs; compare elapsed time using a suitable tick source such as `HAL_GetTick`.
+3. **Error handling:** reason about repeated, out-of-order, or unexpected button events.
 
----
+## Integration note
 
-## 🧠 Bu Modül Size Ne Katar?
-
-Bu kodları inceleyip uyguladığınızda şunları fark edeceksiniz:
-1.  **Hafıza Kullanımı:** `static` değişkenler kullanarak sistemin geçmişini (örn: motor ne zaman kapandı?) hatırlamayı.
-2.  **Zaman Yönetimi:** Kesme içinde `Delay` kullanmadan, zaman farklarını (`HAL_GetTick`) ölçerek karar vermeyi.
-3.  **Hata Toleransı:** Kullanıcının rastgele veya hatalı basışlarına karşı sistemin kararlı (stable) kalmasını sağlamayı.
-
----
-
-## ⚠️ Teknik Kurulum Notu
-
-Bu kodlar **Interrupt Handler** yapısı üzerine kuruludur. Çalışmaları için `stm32f4xx_it.c` dosyasının en tepesinde (Global Alan) şu değişkenlerin tanımlı olması gerekir:
+These snippets target an interrupt-handler-based HAL project. The original examples describe state variables such as:
 
 ```c
 /* USER CODE BEGIN 0 */
 int sistem_modu = 0;       // Genel durum değişkeni
 int acil_durum = 0;        // Güvenlik kilidi
 /* USER CODE END 0 */
+```
+
+Integrate only after checking the generated file layout and state ownership. Shared ISR/foreground state requires careful handling of visibility and atomicity.
+
+> **Safety scope:** These examples **simulate** software control decisions. They are not industrial safety standards, certified emergency stops, verified motor protection, or substitutes for physical safety circuits.
+
+[EXTI overview](../README.md) · [Learning roadmap](../../LEARNING_PATH.md)
