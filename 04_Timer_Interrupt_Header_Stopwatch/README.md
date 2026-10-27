@@ -1,54 +1,54 @@
-# ⏱️ STM32 Timer Interrupt Stopwatch & Embedded Algorithms
+# STM32 Timer Interrupts — Stopwatch and Embedded Algorithms
 
-Bu depo (repository), STM32 mikrodenetleyicisi kullanılarak geliştirilmiş **Timer Interrupt (Zamanlayıcı Kesmesi)** tabanlı hassas bir kronometre uygulamasını ve gömülü sistemler için kritik algoritma örneklerini içerir.
+**English | [Türkçe](README.tr.md)**
 
-## 🎯 Ana Proje: Dakika/Saniye Kronometre
-Gömülü sistemlerde işlemciyi `delay` komutlarıyla meşgul etmeden (Non-blocking) zaman takibi yapabilmek kritik bir mühendislik yetkinliğidir.
+This module brings together a **timer-interrupt-driven minute/second stopwatch** and additional embedded algorithm exercises focused on non-blocking timing, multiplexing, and state machines.
 
-* **İlgili Dosya:** `01_dk_sn_kronometre`
+## Main project — minute/second stopwatch
 
-### 🚀 Özellikler
-* **Timer Interrupts:** Süre takibi ana döngüde (while) değil, arka planda donanımsal Timer (TIM1) kesmesi ile milimetrik hassasiyette yapılır.
-* **Multiplexing (Tarama):** 4 haneli 7-segment display, insan gözünün algılayamayacağı hızda taranarak sürülür.
-* **Cascade Logic:** Dakika ve saniye geçişleri (60 sn -> 1 dk) zincirleme bir algoritma ile kontrol edilir.
+Relevant example: `01_dk_sn_kronometre`.
 
-### 🛠️ Donanım ve Pin Bağlantıları
-* **Mikrodenetleyici:** STM32F4 Serisi
-* **Ekran:** 4-Digit 7-Segment Display
-* **Segment Pinleri:** GPIO (A, B, C, D, E, F, G, DP) -> PE8-PE15
-* **Kontrol Pinleri (Scan):**
-    * Digit 1 (Dakika Onlar): PE4
-    * Digit 2 (Dakika Birler): PE5
-    * Digit 3 (Saniye Onlar): PE6
-    * Digit 4 (Saniye Birler): PE7
+The goal is to keep time without blocking the foreground loop with software delays.
 
----
+- **Timer interrupts:** a configured hardware timer such as TIM1 periodically updates the timekeeping state.
+- **Display multiplexing:** scan four seven-segment digits rapidly enough for a continuous display.
+- **Cascade logic:** carry from seconds to minutes as the count advances.
 
-## 📚 Gömülü Sistem Algoritma Örnekleri (Snippets)
-Bu proje kapsamında, sadece donanım sürmek değil, **algoritma kurma yeteneğini** geliştirmek amacıyla aşağıdaki 10 farklı senaryo kodlanmıştır.
+The actual timing resolution and precision depend on clock configuration, prescaler, timer period, interrupt latency, and hardware measurement; no independent timing-accuracy guarantee is implied.
 
-| Dosya Adı | Proje Açıklaması | Kazanılan Yetkinlik (Vizyon) |
-| :--- | :--- | :--- |
-| `01_dk_sn_kronometre` | **Ana Proje (Kronometre):** Dakika ve saniye sayan, kesme (interrupt) tabanlı hassas zamanlayıcı. | **Timer Interrupt** & **Multiplexing** & **Cascade Logic** |
-| `02_Reaction_Timer` | **Refleks Ölçer:** Rastgele yanan ışığa tepki süresini ölçer. | Randomness (Rastgelelik) & Input Capture |
-| `03_Akıllı_Trafik_Işığı_(FSM)` | **Trafik Işığı:** Yaya butonlu, durum kontrollü trafik sistemi. | Finite State Machine (FSM) Mimarisi |
-| `04_Simon_Says_(Hafıza Oyunu)` | **Hafıza Oyunu:** Rastgele yanan LED dizisini tekrar etme oyunu. | Dizi (Array) Yönetimi & Oyun Algoritması |
-| `05_Nefes_Alan_Işık_(Breathing LED)` | **Breathing LED:** Işığın yumuşakça yanıp sönmesi. | PWM Simülasyonu & Duty Cycle Mantığı |
-| `06_Park_Sensörü_Simülasyonu` | **Park Sensörü:** Mesafeye göre artan sesli uyarı sistemi. | Data Mapping (Veri Haritalama) |
-| `07_Pomodoro_Zamanlayıcı` | **Pomodoro:** 25 dakikadan geriye sayan çalışma saati. | Geri Sayım (Count-Down) & Flag Yönetimi |
-| `08_Mors_Alfabesi_Çevirici` | **Mors Kodu:** Yazıyı (String) ışık sinyaline çevirir. | String İşleme & İletişim Protokolü Temeli |
-| `09_Dijital_Zar_(Rastgele Sayı)` | **Dijital Zar:** Butona basılınca dönen, bırakınca duran zar. | UX Tasarımı & Modulo Aritmetiği |
-| `10_Butonla_Menü_Kontrolü` | **Menü Sistemi:** Tek butonla ekranlar arası geçiş. | State Management & Multitasking |
-| `11_Çift_Yönlü_Sayıcı_(Up_Down_Counter)` | **İleri/Geri Sayaç:** İki butonla sınır kontrollü sayma. | Edge Case (Sınır Durumu) & Overflow Koruması |
+### Hardware mapping assumed by the examples
 
----
+- **MCU:** STM32F4 family.
+- **Display:** four-digit seven-segment display.
+- **Segments A–G and DP:** `PE8–PE15`.
+- **Digit select:** minute tens `PE4`, minute ones `PE5`, second tens `PE6`, second ones `PE7`.
 
-## 📂 Yazılım Mimarisi
-Proje modüler bir yapıda tasarlanmıştır:
+## Additional exercises
 
-1.  **`bizimKutuphane.h`:** 7-Segment Display sürme, Multiplexing ve sayıları basamaklarına ayırma fonksiyonlarını barındıran özel kütüphane.
-2.  **`stm32f4xx_it.c` (Snippet içinde):** Timer her 1 saniyede bir kesme (Interrupt) oluşturduğunda devreye giren ISR kodu.
-3.  **`main.c` (Snippet içinde):** Sürekli ekranı tarayan ve zaman limitlerini denetleyen ana döngü mantığı.
+| Example | Application | Concept |
+| --- | --- | --- |
+| `01_dk_sn_kronometre` | Minute/second stopwatch | Timer IRQs, multiplexing, carry logic |
+| `02_Reaction_Timer` | Reaction timer | Event timing |
+| `03_Akıllı_Trafik_Işığı_(FSM)` | Traffic light and pedestrian button | Finite-state machines |
+| `04_Simon_Says_(Hafıza Oyunu)` | Simon Says memory sequence | Arrays and state |
+| `05_Nefes_Alan_Işık_(Breathing LED)` | Gradually varying LED brightness | PWM-style duty-cycle logic |
+| `06_Park_Sensörü_Simülasyonu` | Parking proximity alert | Mapping distance to alert rate |
+| `07_Pomodoro_Zamanlayıcı` | Twenty-five-minute countdown | Flags and countdown logic |
+| `08_Mors_Alfabesi_Çevirici` | Morse-code light signals | String processing and signaling |
+| `09_Dijital_Zar_(Rastgele Sayı)` | Button-controlled digital die | Display state and modulo logic |
+| `10_Butonla_Menü_Kontrolü` | One-button menu | State changes |
+| `11_Çift_Yönlü_Sayıcı_(Up_Down_Counter)` | Bounded up/down counter | Edge cases and overflow avoidance |
 
----
-**Geliştirici:** Merd0 (Mert Aydın)
+## Software structure
+
+The examples describe three cooperating components:
+
+1. `bizimKutuphane.h`: seven-segment multiplexing and digit extraction helpers.
+2. `stm32f4xx_it.c`: an interrupt handler updating shared timing state.
+3. `main.c`: foreground display scanning and application logic.
+
+The latter two may be shown as snippets within the repository. Adapt them to the generated STM32 HAL project layout.
+
+**Timing reminder:** Configure the timer and NVIC in CubeMX **and** start the timer in the user-code startup path, for example with `HAL_TIM_Base_Start_IT(&htim1)` using the timer handle relevant to your project.
+
+[Learning roadmap](../LEARNING_PATH.md) · [Türkçe](README.tr.md)
