@@ -58,7 +58,7 @@ Kodların hedeflenen donanım (Deney Kartı) üzerindeki pin haritalaması:
 | [`08_refleks_testi_basitDüzey.c`](./02_GPIO_Input/08_refleks_testi_basitDüzey.c) | **Refleks Testi**<br>LED yandığı anda butona basmayı bekleyen, `HAL_GetTick()` kullanmayan basit ölçüm. | ![](https://img.shields.io/badge/-Başlangıç-success?style=flat-square) |
 
 ### 3. Modül: Interrupts & EXTI (Dış Kesmeler) ⚡
-*Konum:* [`03_Interrupts_EXTI/`](./03_Interrupts_EXTI/)
+*Konum:* [`03_Interrupts_EXTI/`](./03_Interrupts_EXTI/README.tr.md)
 
 **Temel Dosyalar (Root):**
 | Dosya Adı | Teknik Detay & Açıklama | Zorluk |
@@ -86,7 +86,7 @@ Kodların hedeflenen donanım (Deney Kartı) üzerindeki pin haritalaması:
 | [`06_double_click.c`](./03_Interrupts_EXTI/Interrupts_İleriSeviye/06_double_click.c) | **Double Click**<br>Mouse mantığı: Tek tıklama ile Çift tıklamayı zaman farkına göre ayırt eden algoritma. | ![](https://img.shields.io/badge/-Uzman-blueviolet?style=flat-square) |
 
 ### 4. Modül: Timer Interrupts & Algorithms ⏱️
-*Konum:* [`04_Timer_Interrupt_Header_Stopwatch/`](./04_Timer_Interrupt_Header_Stopwatch/)
+*Konum:* [`04_Timer_Interrupt_Header_Stopwatch/`](./04_Timer_Interrupt_Header_Stopwatch/README.tr.md)
 
 | Dosya Adı | Teknik Detay & Açıklama | Zorluk |
 | :--- | :--- | :---: |
